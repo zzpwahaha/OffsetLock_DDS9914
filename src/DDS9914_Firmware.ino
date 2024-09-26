@@ -29,6 +29,20 @@
 //v.0.6 22.09.2020 Добавлены ограничение и проверка при установке внешней частоты тактирования
 //v.0.5 21.09.2020 Почти додеално меню с настройками такитрования
 
+//v0.84 06/22/2023
+//Added commands to enable and disable outputs
+//v0.83 06/20/2023
+//speeded up processing of commands transmitted via the serial port
+//v0.82 06/06/2023
+//Added support for commands via the serial port
+//Updated the encoder library to version 3, for more stable operation
+//v0.81 04/08/2021 Encoder library update
+//v.0.8 09/24/2020 Adding saving of all parameters to EEPROM
+//v.0.7 09/23/2020 Implementing DDS control
+//v.0.6 09/22/2020 Added limitation and check when setting an external frequency clocking
+//v.0.5 09/21/2020 Almost perfect menu with clocking settings
+
+
 //Declare the DDS object:
 AD9914 DDS(CSPIN, RESETPIN, IO_UPDATEPIN, PS0PIN, PS1PIN, PS2PIN, OSKPIN);
 
@@ -81,7 +95,7 @@ void setup() {
 
   modeButton.Update();
 
-  if (modeButton.depressed == true) //если при включении была зажата кнопка MODE, то затираем управляющие флаги в EEPROM, которые восстановят заводские значения всех параметров
+  if (modeButton.depressed == true) //if the MODE button was pressed when turning on, then erase the control flags in the EEPROM, which will restore the factory values ​​of all parameters
   {
     EEPROM.write(CLOCK_SETTINGS_FLAG_ADR, 255); //flag that force save default clock settings to EEPROM 
     EEPROM.write(MAIN_SETTINGS_FLAG_ADR, 255); //flag that force save default main settings to EEPROM 
